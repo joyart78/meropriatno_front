@@ -1,0 +1,48 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 36px;
+  border: none;
+  border-radius: 50px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.btn--primary {
+  background: var(--orange);
+  color: var(--white);
+  box-shadow: 0 4px 15px rgba(243, 100, 51, 0.3);
+}
+
+.btn--primary:hover {
+  background: #e05522;
+  box-shadow: 0 8px 25px rgba(243, 100, 51, 0.4);
+  transform: translateY(-2px);
+}
+
+.btn--outline {
+  background: transparent;
+  color: var(--dark);
+  border: 2px solid rgba(61, 42, 74, 0.2);
+}
+
+.btn--outline:hover {
+  background: rgba(61, 42, 74, 0.05);
+  border-color: var(--dark);
+}
+
+.btn--purple {
+  background: var(--purple);
+  color: var(--white);
+}
+
+.btn--purple:hover {
+  background: #7a5c94;
+  transform: translateY(-2px);
+}

@@ -1,0 +1,87 @@
+@font-face {
+  font-family: 'Montserrat';
+  src: url('public/fonts/Montserrat-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Masiva';
+  src: url('public/fonts/Masiva-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --pink: #ef88af;
+  --yellow: #ffda8c;
+  --orange: #f36433;
+  --purple: #8e6ca8;
+  --pink-light: #f8c4d8;
+  --yellow-light: #fff4d6;
+  --purple-light: #c4afd4;
+  --dark: #2d1b3d;
+  --text: #3d2a4a;
+  --text-light: #7a6b82;
+  --white: #ffffff;
+  --section-padding: 100px 0;
+  --container-width: 1200px;
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 8px 40px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 16px 60px rgba(0, 0, 0, 0.12);
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --font-montserrat: 'Montserrat', sans-serif;
+  --font-masiva: 'Masiva', sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: var(--font-montserrat), sans-serif;
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --section-padding: 70px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --section-padding: 50px 0;
+  }
+}

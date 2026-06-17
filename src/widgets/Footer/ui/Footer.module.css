@@ -1,0 +1,96 @@
+.footer {
+  background: var(--dark);
+  color: rgba(255, 255, 255, 0.7);
+  padding: 60px 0 30px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 30px;
+}
+
+.brand {
+  font-family: var(--font-masiva), sans-serif;
+  font-size: 22px;
+  color: var(--white);
+  margin-bottom: 12px;
+}
+
+.brandDot {
+  color: var(--pink);
+}
+
+.desc {
+  font-size: 14px;
+  line-height: 1.7;
+  max-width: 300px;
+}
+
+.heading {
+  font-weight: 600;
+  color: var(--white);
+  font-size: 15px;
+  margin-bottom: 16px;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.link {
+  font-size: 14px;
+  transition: var(--transition);
+  color: inherit;
+  text-decoration: none;
+}
+
+.link:hover {
+  color: var(--pink);
+}
+
+.bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+}
+
+.bottomSocials {
+  display: flex;
+  gap: 16px;
+}
+
+.bottomSocials a {
+  transition: var(--transition);
+  color: inherit;
+  text-decoration: none;
+}
+
+.bottomSocials a:hover {
+  color: var(--pink);
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .bottom {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+}

@@ -1,0 +1,4 @@
+services:
+  frontend:
+    image: ghcr.io/${IMAGE_OWNER:-meropriyatno}/meropriyatno-frontend:latest
+    network_mode: "host"
