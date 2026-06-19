@@ -49,8 +49,9 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
+            echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin
             cd /app/meropriyatno-frontend
             export IMAGE_OWNER=${{ github.repository_owner }}
-            docker compose -f docker-compose.yml -f docker compose.prod.yml pull
-            docker compose -f docker-compose.yml -f docker compose.prod.yml up -d
+            docker compose -f docker-compose.prod.yml pull
+            docker compose -f docker-compose.prod.yml up -d
             docker image prune -f
