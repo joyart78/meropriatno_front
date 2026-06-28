@@ -41,6 +41,7 @@ export function ContactSection() {
                     href={link.href}
                     className={styles.socialLink}
                     aria-label={link.label}
+                    target="_blank"
                   >
                     <Icon
                       name={link.label === "Telegram" ? "telegram" : "vk"}
