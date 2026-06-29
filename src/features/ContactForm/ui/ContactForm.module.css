@@ -10,6 +10,12 @@
   gap: 20px;
 }
 
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
 .input,
 .textarea {
   width: 100%;
@@ -31,14 +37,29 @@
 
 .input:focus,
 .textarea:focus {
-  border-color: var(--pink);
+  border-color: var(--purple);
   background: var(--white);
   box-shadow: 0 0 0 4px rgba(239, 136, 175, 0.1);
+}
+
+.inputError {
+  border-color: #e74c3c;
+}
+
+.inputError:focus {
+  border-color: #e74c3c;
+  box-shadow: 0 0 0 4px rgba(231, 76, 60, 0.1);
 }
 
 .textarea {
   min-height: 140px;
   resize: vertical;
+}
+
+.error {
+  font-size: 13px;
+  color: #e74c3c;
+  padding-left: 4px;
 }
 
 .success {
