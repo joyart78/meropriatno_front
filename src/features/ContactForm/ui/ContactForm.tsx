@@ -1,37 +1,33 @@
 "use client";
 
-import { useState } from "react";
-import { Button } from "../../../shared/ui/Button";
+import { useForm } from "react-hook-form";
+import { Button } from "@/shared/ui/Button";
+import { useSendContactFormMutation } from "@/shared/api/baseApi";
 import styles from "./ContactForm.module.css";
-import { useSendContactFormMutation } from "../../../shared/api/baseApi";
 
-interface FormState {
+interface FormValues {
   name: string;
   phone: string;
   email: string;
   message: string;
 }
 
+const PHONE_REGEX = /^(\+7|8)[\s-]?\(?\d{3}\)?[\s-]?\d{3}[\s-]?\d{2}[\s-]?\d{2}$/;
+
 export function ContactForm() {
-  const [form, setForm] = useState<FormState>({
-    name: "",
-    phone: "",
-    email: "",
-    message: "",
-  });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitSuccessful },
+    reset,
+  } = useForm<FormValues>();
+
   const [send, { isLoading, isSuccess }] = useSendContactFormMutation();
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const onSubmit = async (data: FormValues) => {
     try {
-      await send(form).unwrap();
-      setForm({ name: "", phone: "", email: "", message: "" });
+      await send(data).unwrap();
+      reset();
     } catch {
       alert("Произошла ошибка. Попробуйте позже.");
     }
@@ -42,44 +38,70 @@ export function ContactForm() {
   }
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
+    <form className={styles.form} onSubmit={handleSubmit(onSubmit)} noValidate>
       <div className={styles.row}>
-        <input
-          type="text"
-          name="name"
-          className={styles.input}
-          placeholder="Ваше имя"
-          value={form.name}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="tel"
-          name="phone"
-          className={styles.input}
-          placeholder="Телефон"
-          value={form.phone}
-          onChange={handleChange}
-          required
-        />
+        <div className={styles.field}>
+          <input
+            {...register("name", { required: "Введите имя" })}
+            className={`${styles.input} ${errors.name ? styles.inputError : ""}`}
+            placeholder="Ваше имя"
+          />
+          {errors.name && (
+            <span className={styles.error}>{errors.name.message}</span>
+          )}
+        </div>
+        <div className={styles.field}>
+          <input
+            {...register("phone", {
+              required: "Введите телефон",
+              pattern: {
+                value: PHONE_REGEX,
+                message: "Неверный формат телефона",
+              },
+            })}
+            className={`${styles.input} ${errors.phone ? styles.inputError : ""}`}
+            placeholder="Телефон"
+          />
+          {errors.phone && (
+            <span className={styles.error}>{errors.phone.message}</span>
+          )}
+        </div>
       </div>
-      <input
-        type="email"
-        name="email"
-        className={styles.input}
-        placeholder="Email"
-        value={form.email}
-        onChange={handleChange}
-        required
-      />
-      <textarea
-        name="message"
-        className={styles.textarea}
-        placeholder="Расскажите о вашем событии"
-        value={form.message}
-        onChange={handleChange}
-        required
-      />
+
+      <div className={styles.field}>
+        <input
+          {...register("email", {
+            required: "Введите email",
+            pattern: {
+              value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+              message: "Неверный формат email",
+            },
+          })}
+          className={`${styles.input} ${errors.email ? styles.inputError : ""}`}
+          placeholder="Email"
+        />
+        {errors.email && (
+          <span className={styles.error}>{errors.email.message}</span>
+        )}
+      </div>
+
+      <div className={styles.field}>
+        <textarea
+          {...register("message", {
+            required: "Напишите пару слов о вашем событии",
+            minLength: {
+              value: 10,
+              message: "Минимум 10 символов",
+            },
+          })}
+          className={`${styles.textarea} ${errors.message ? styles.inputError : ""}`}
+          placeholder="Расскажите о вашем событии"
+        />
+        {errors.message && (
+          <span className={styles.error}>{errors.message.message}</span>
+        )}
+      </div>
+
       <Button
         type="submit"
         disabled={isLoading}
